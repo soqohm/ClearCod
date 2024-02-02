@@ -86,7 +86,47 @@ namespace __Ясный_код
     7.5
 
 
-    *
+    Я взял код коллег и попытался дать выразительные имена временным переменным (и аргументам функции)
+
+
+    StructuredTechnologicalProcess CreateTechnologicalProcess(
+        ReferenceObject productionUnit,
+        ReferenceObject productionUnitStep,
+        MaterialObject productOfTechProcess, 
+        HashSet<string> registeredProductionUnits,
+        ClassObject typeOfTechProcess)
+    {
+        var productNumber = productOfTechProcess.Denotation;
+        var productionUnitNumber = productionUnit[UserAndGroupsGuids.ProductionUnitNumberGuid].GetString();
+        var techProcess = productionUnitStep.Reference.CreateReferenceObject(typeOfTechProcess) as StructuredTechnologicalProcess;
+        techProcess.Name.Value = productOfTechProcess.Name;
+        var techProcessNumber = string.Empty;
+        var successToFindUniqueName = false;
+        var index = 0;
+
+        while (!successToFindUniqueName)
+        {
+            techProcessNumber = index == 0 ? $"{productNumber}_{productionUnitNumber}" : $"{productNumber}_{productionUnitNumber}_{index}";
+
+            if (registeredProductionUnits.Contains(techProcessNumber))
+            {
+                index++;
+                continue;
+            }
+            successToFindUniqueName = true;
+        }
+
+        techProcess.Denotation.Value = techProcessNumber;
+        techProcess.AddLinkedObject(TechnologicalProcess.OneToManyGroups.ProducedDSE, productOfTechProcess);
+        techProcess.ProductionUnit.SetLinkedObject(productionUnit);
+        techProcess.DseMass.Value = productOfTechProcess.Mass;
+        var list = productOfTechProcess.GetAllLinkedFiles();
+        list.AddRange(productOfTechProcess.LinkedObject.GetAllLinkedFiles());
+        techProcess.SketchFileLink.SetLinkedObject(list.FirstOrDefault());
+        techProcess.EndChanges();
+
+        return techProcess;
+    }
 
 
     */
