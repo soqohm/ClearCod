@@ -229,55 +229,112 @@ namespace __Ясный_код
     7. 
     
 
-    //
+    переменная _файлыНаПечать используется в добавляемых событиях
+    ПРОПУСКАЮ ЭТУ ПЕРЕМЕННУЮ
+
+
+    переменная _localMagickFilePath имеет одно присваивание и три использования
+    локализовал использование в отдельной функции
+    теперь одно присваивание и одно использование
+
+
+    стало
+
+
+    void DrawStamp(string cmd, ref StringBuilder errors)
+    {
+        StartProcess(_localMagickFilePath, cmd, ref errors);
+    }
 
     
     8.
 
 
-    //
+    переменная _логОшибок используется в одном месте
+    перенес ее внутрь соответствующей функции
+
+
+    private static void WriteLog(string errors)
+    {
+        if (string.IsNullOrEmpty(errors))
+            return;
+
+        var логОшибок = Path.Combine(_папкаДляВременныхФайлов, "TFlex.DOCs.PDM.Print.log");
+
+        using (var logWriter = new TFlex.DOCs.Common.LogWriter())
+        {
+            logWriter.InitializeFileMode(логОшибок, false);
+            logWriter.Write(errors);
+        }
+    }
 
 
     9.
 
 
-    //
+    переменная _списокИдентификаторовДокументов
+    используется в одном месте, но с рекурсией и многовложенным циклом
+    локализовал как переменную метода, вынеся ее в аргументы вложенных функций
 
+
+    стало
+
+
+    var списокИдентификаторовДокументов = new List<int>();
+    foreach (Объект объектНоменклатуры in ВыбранныеОбъекты)
+        ИскатьФайлыВОбъекте(объектНоменклатуры, уровеньВложенности, диалог, списокИдентификаторовДокументов);
+    
 
     10.
-
-
-    //
-
-
-    11. 
     
     
-    //
+    переменная _номерИзменения является производной от ТекущегоОбъекта
+    используется в двух местах
+    можно упростить глобальную переменную, сделав ее локальной внутри методов
+
+
+    стало
+
+
+    var номерИзменения = ПолучитьНомерИзмененияДляШтампа(объектНоменклатуры);
 
     
-    12. 
-    
-    
-    //
-
-    
-    13.
+    11. 12. 13. 14. 15.
 
 
-    //
+    переменные _stampColor, _stampOpacity, _stampGlobalX, _stampGlobalY, _stampGlobalAngle
+    всегда используются вместе
+    локализовал их в отдельном классе
 
 
-    14. 
-    
-    
-    //
-
-    
-    15.
+    стало
 
 
-    //
+    public class StampParameters
+    {
+        public readonly int Color;
+        public readonly double Opacity;
+        public readonly double GlobalX;
+        public readonly double GlobalY;
+        public readonly int GlobalAngle;
+
+        public StampParameters(int color, double opacity, double globalX, double globalY, int globalAngle)
+        {
+            Color = color;
+            Opacity = opacity;
+            GlobalX = globalX;
+            GlobalY = globalY;
+            GlobalAngle = globalAngle;
+        }
+    }
+
+
+    var stampParams = new StampParameters(
+        ТекущийОбъект["Цвет"], 
+        ТекущийОбъект["Видимость"],
+        ТекущийОбъект["X"],
+        ТекущийОбъект["Y"],
+        ТекущийОбъект["Угол поворота"]);
 
 
     */

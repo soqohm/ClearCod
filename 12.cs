@@ -12,41 +12,52 @@ namespace __Ясный_код
     1.
 
 
-    переменная MagickExePath используется всего в одном месте
-    перенес ее внутрь соответствующей функции
+    Переменные связываются в конструкторе
+    Следую рекомендациям из предыдущих занятий 
+    ("Инициализируйте все без исключения атрибуты/поля класса в его конструкторе")
 
-    private void LoadBinaryFiles()
+
+    var stampParams = new StampParameters(
+        ТекущийОбъект["Цвет"], 
+        ТекущийОбъект["Видимость"],
+        ТекущийОбъект["X"],
+        ТекущийОбъект["Y"],
+        ТекущийОбъект["Угол поворота"]);
+
+
+    public class StampParameters
     {
-        string MagickExePath = @"Служебные файлы\Библиотека dll\magick.exe";
-        _localMagickFilePath = GetFileLocalPathFromFileReference(MagickExePath);
+        public readonly int Color;
+        public readonly double Opacity;
+        public readonly double GlobalX;
+        public readonly double GlobalY;
+        public readonly int GlobalAngle;
+
+        public StampParameters(int color, double opacity, double globalX, double globalY, int globalAngle)
+        {
+            Color = color;
+            Opacity = opacity;
+            GlobalX = globalX;
+            GlobalY = globalY;
+            GlobalAngle = globalAngle;
+        }
     }
 
     
     2. 
     
     
-    тоже самое с переменной SupportedExtensions
-    она используется только в одном месте
-    перенес ее внутрь соответствующей функции
-
-
-    private bool ТипФайлаПоддерживается(string filePath)
-    {
-        if (string.IsNullOrEmpty(filePath))
-            return false;
-
-        var extension = Path.GetExtension(filePath).ToLower();
-        var supportedExtensions = new string[] { ".tif", ".tiff", ".pdf" };
-        return supportedExtensions.Contains(extension);
-    }
+    //
+    //
+    //
 
     
     3. 
     
     
-    переменную _currentDateTime (которая всегда равна DateTime.Now)
-    минимизировал до размеров атома
-    теперь ее просто нет
+    //
+    //
+    //
 
 
     */
