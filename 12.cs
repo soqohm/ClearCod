@@ -12,8 +12,8 @@ namespace __Ясный_код
     1.
 
 
-    Переменные связываются в конструкторе
-    Следую рекомендациям из предыдущих занятий 
+    переменные связываются в конструкторе
+    следую рекомендациям из предыдущих занятий 
     ("Инициализируйте все без исключения атрибуты/поля класса в его конструкторе")
 
 
@@ -46,18 +46,32 @@ namespace __Ясный_код
     
     2. 
     
+
+    переменная templateFileId - id файла шаблона, на основе которого создается отчет
+    переменная templateFileId используется только внутри специального метода LoadTemplateFileDOCs
+
     
-    //
-    //
-    //
+    FileObject LoadTemplateFileDOCs()
+    {
+        var fileReference = LoadReference("Файлы");
+        var templateFileId = 736044;
+        return fileReference.Find(templateFileId) as FileObject;
+    }
 
     
     3. 
     
+
+    переменные filePath и basicPartOfFileName тоже используются только внутри метода SaveAsNewDocument
+
     
-    //
-    //
-    //
+    void SaveAsNewDocument(Document savedDoc, SAPRTeamReferenceObject sourceOfFileName)
+    {
+        var filePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        var basicPartOfFileName = sourceOfFileName.GetVar(СправочникИзвещенияОбИзменениях.Параметр.Обозначение);
+
+        SaveAsNewDocument(savedDoc, filePath, basicPartOfFileName);
+    }
 
 
     */
