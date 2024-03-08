@@ -256,16 +256,46 @@ namespace __Ясный_код
     (удалил ненужный код)
 
 
-    14.
+    14.  п.2 Бормотание
 
 
-    //
+    было:
 
 
-    15.
+    // посылаем письмо пользователю
+    new MailMessage(Context.Connection.Mail.DOCsAccount)
+        .AddSubject("Результат задачи массовой замены")
+        .AddBody(body)
+        .AddTo(new List<User> { task.SystemFields.Author })
+        .Send();
 
 
-    //
+    стало:
+
+
+    new MailMessage(Context.Connection.Mail.DOCsAccount)
+        .AddSubject("Результат задачи массовой замены")
+        .AddBody(body)
+        .AddTo(new List<User> { task.SystemFields.Author })
+        .Send();
+
+
+    15.  п.5 Позиционные маркеры
+
+
+    было:
+
+
+        }
+
+        // 
+    }
+
+
+    стало:
+
+
+    (удалил все свои позиционные маркеры в одном макросе)
 
 
     */
