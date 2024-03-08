@@ -219,16 +219,41 @@ namespace __Ясный_код
     var folderForImportFiles = fileReference.FindByRelativePath("Логи") as FolderObject;
 
 
-    12.
+    12.  п.2 Бормотание
 
 
-    //
+    было:
 
 
-    13.
+    //создаем отдельный настойки конфигурирования от которых будет работать макрос
+    //на случай если работает со стороны БП или пользователь указал иные настройки конфигурирования
+    var newConfiguirationSettings = new ConfigurationSettings(Context.Connection)
 
 
-    //
+    стало:
+
+
+    var newConfiguirationSettings = new ConfigurationSettings(Context.Connection)
+
+
+    13.  п.11 Закомментированный код
+
+
+    было:
+
+
+    //public override void Run()
+    //{
+    //    var reference = Context.GetReference(LiteralizationTasks.Reference.ToString());
+    //    var task = reference.Find(1);
+    //    RunTask(task);
+    //}
+
+
+    стало:
+
+
+    (удалил ненужный код)
 
 
     14.
