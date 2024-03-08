@@ -9,7 +9,81 @@ namespace __Ясный_код
     /*
        
 
-    // в работе
+    1.
+
+
+    было: StageNode
+    стало: StageChanger
+
+
+    2.
+
+
+    было: MyConfiguration
+    стало: GitConfiguration
+
+
+    3.
+
+
+    было: Button
+    стало: TFlexCADButton
+
+
+    4.
+
+
+    было: Column
+    стало: ExcelReportColumn
+
+
+    5.
+
+
+    было: HierarchyData
+    стало: DepthWeights
+
+
+    6.
+
+
+    //
+
+
+    7.
+
+
+    //
+
+
+    8.
+
+
+    //
+
+
+    9.
+
+
+    //
+
+
+    10.
+
+
+    //
+
+
+    11.
+
+
+    //
+
+
+    12.
+
+
+    //
 
 
     */
