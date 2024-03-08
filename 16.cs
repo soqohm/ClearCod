@@ -82,22 +82,68 @@ namespace __Ясный_код
     (удалил ненужный код)
 
 
-    5.
+    5.  п.10 Обязательные комментарии
 
 
-    //
+    было:
 
 
-    6.
+    /// <summary>
+    /// Вызывается на сохранении объекта
+    /// </summary>
+    public void ИсправитьИмяМакроса()
 
 
-    //
+    стало:
 
 
-    7.
+    public void ИсправитьИмяМакроса()
 
 
-    //
+    6.  п.4 Шум
+
+
+    было:
+
+
+    if (!ДиалогОжидания.СледующийШаг($"Макрос {++counter} из {allMacroses.Count}")) // возвращает false, если нажата кнопка "Отмена"
+        return;
+
+
+    стало:
+
+
+    if (!ДиалогОжидания.СледующийШаг($"Макрос {++counter} из {allMacroses.Count}"))
+        return;
+
+
+    7.  п.11 Закомментированный код
+
+
+    было:
+
+
+    if (macroName != macroNameNew)
+    {
+        //var needToEndChanges = false;
+        //if (!объект.Changing)
+        //{
+        //    объект.BeginChanges();
+        //    needToEndChanges = true;
+        //}
+
+        объект[Macroses.Parameters.Name].Value = macroNameNew;
+
+        //if (needToEndChanges)
+        //    объект.EndChanges();
+    }
+
+
+    стало:
+
+
+    if (macroName != macroNameNew)
+        объект[Macroses.Parameters.Name].Value = macroNameNew;
 
 
     8.
