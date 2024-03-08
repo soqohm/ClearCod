@@ -146,16 +146,44 @@ namespace __Ясный_код
         объект[Macroses.Parameters.Name].Value = macroNameNew;
 
 
-    8.
+    8.  п.2 Бормотание
 
 
-    //
+    было:
 
 
-    9.
+    //подгружаем необходимые параметры
+    curRef.LoadSettings.Clear();
+    curRef.LoadSettings.AddParameters(allStrParInfo.Select(pi => pi.Guid).ToArray());
 
 
-    //
+    стало:
+
+
+    curRef.LoadSettings.Clear();
+    curRef.LoadSettings.AddParameters(allStrParInfo.Select(pi => pi.Guid).ToArray());
+
+
+    9.  п.2 Бормотание
+
+
+    было:
+
+
+    //получаем ParInfo всех не системных строковых параметров 
+    HashSet<ParameterInfo> allStrParInfo = Context.Reference.ParameterGroup.GetAllGroups()
+        .SelectMany(parGroup => parGroup.Parameters)
+        .Where(pi => !pi.IsSystem && pi.Type.IsString && string.IsNullOrEmpty(pi.UserControl))
+        .ToHashSet();
+
+
+    стало:
+
+
+    HashSet<ParameterInfo> allStrParInfo = Context.Reference.ParameterGroup.GetAllGroups()
+        .SelectMany(parGroup => parGroup.Parameters)
+        .Where(pi => !pi.IsSystem && pi.Type.IsString && string.IsNullOrEmpty(pi.UserControl))
+        .ToHashSet();
 
 
     10.
