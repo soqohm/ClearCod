@@ -186,16 +186,37 @@ namespace __Ясный_код
         .ToHashSet();
 
 
-    10.
+    10.  п.10 Обязательные комментарии
 
 
-    //
+    было:
 
 
-    11.
+    /// <summary>
+    /// Записывает лог в файл и загружает его в DOCs
+    /// </summary>
+    private void WriteLogs()
 
 
-    //
+    стало:
+
+
+    private void saveLogToDOCs()
+
+
+    11.  п.2 Бормотание
+
+
+    было:
+
+
+    var parentFolder = fileReference.FindByRelativePath("Логи") as FolderObject; //задаем целевую папку для импорта файлов
+
+
+    стало:
+
+
+    var folderForImportFiles = fileReference.FindByRelativePath("Логи") as FolderObject;
 
 
     12.
