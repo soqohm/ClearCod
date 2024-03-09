@@ -77,16 +77,35 @@ namespace __Ясный_код
     public IEnumerable<NomenclatureHierarchyLink> LoadChilds()
 
 
-    9.
+    9. Использование Product как Сборочная единица (не отдельная деталь)
 
 
-    //
+    public static string[] GetProductLinks(this Document doc)
+    {
+        return GetExternalLinks(doc.FileName, false)
+            .Where(str => GetExternalLinks(str, true).FirstOrDefault() != null)
+            .ToArray();
+    }
+
+    public static bool IsProduct(this Fragment3D f)
+    {
+        return GetExternalLinks(f.FullFilePath, false).FirstOrDefault() != null;
+    }
 
 
-    10.
+    10. Использование MaterialObject (Деталь, Сборка и т.п.) как все, что не документация
 
 
-    //
+    public static bool IsMaterialObj(this ReferenceObject obj)
+    {
+        return obj.Class.IsInherit(NomenclatureTypes.Keys.MaterialObject);
+    }
+
+    public static IEnumerable<NomenclatureHierarchyLink> OnlyMaterialChildObjects(this IEnumerable<NomenclatureHierarchyLink> links)
+    {
+        return links
+            .Where(e => e.ChildObject.Class.IsInherit(NomenclatureTypes.Keys.MaterialObject));
+    }
 
 
     11.
