@@ -93,7 +93,7 @@ namespace __Ясный_код
     }
 
 
-    10. Использование MaterialObject (Деталь, Сборка и т.п.) как все, что не документация
+    10. Использование MaterialObject (деталь, сборка и т.п.) как все, что не документация
 
 
     public static bool IsMaterialObj(this ReferenceObject obj)
@@ -108,16 +108,22 @@ namespace __Ясный_код
     }
 
 
-    11.
+    11. Использование Reference как справочник (ReferenceObject - объект справочника)
 
 
-    //
+    private void LoadESIReference(ConfigurationSettings configurationSettings)
 
 
-    12.
+    12. Использование мажорная, минорная часть; мажорная, минорная ревизия
 
 
-    //
+    public MajorRevision MajorPart { get; private set; }
+        
+    public MinorRevision MinorPart { get; private set; }
+
+    void SetMajorPart()
+
+    void SetMinorPart()
 
 
     */
